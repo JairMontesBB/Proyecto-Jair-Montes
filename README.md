@@ -72,16 +72,27 @@ interacciones = [
 ]
 
 ### Añadir aristas (conversaciones entre personajes)
-for convo in interacciones:
-    G.add_edge(*convo)
+for interaccion in interacciones:
+    G.add_edge(*interaccion)
 
-### Dibujar el grafo
+### Crea una nueva figura de matplotlib con el tamaño especificado
 plt.figure(figsize=(12, 10))
-### Layout lo usé para una tener una disposición mejor ya que si no los grafos no se alcanzaban a distinguir bien
+
+### Asigna posiciones a los nodos en el grafo utilizando el algoritmo de disposición Spring Layout
+### Esto asegura una disposición adecuada de los nodos en el espacio
 pos = nx.spring_layout(G, seed=42)  
+
+### Dibuja el grafo G con las posiciones asignadas, incluyendo etiquetas en los nodos
+### Personaliza la apariencia del grafo, como el color de los nodos, el tamaño de los nodos, 
+### el tamaño de la fuente de las etiquetas, el grosor de los bordes y el color de los bordes
 nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=3000, font_size=12, font_weight='bold', edge_color='gray')
+
+### Agrega un título a la figura
 plt.title("Grafo de conversaciones en 'Maze Runner: Correr o Morir'")
+
+### Muestra la figura en la ventana de salida
 plt.show()
+
 
 ### G.nodes: Devuelve una vista que proporciona acceso a los nodos en el grafo.
 print("Nodos:", G.nodes)
