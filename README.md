@@ -1,16 +1,40 @@
 # Proyecto-Jair-Montes
-## Proyecto sobre la creación de un grafo de las interacciones de los personajes en la saga Maze Runner
 
-### Primero instalamos las librerías:
-!pip install networkx matplotlib
+# Proyecto sobre la creación de un grafo de las interacciones de los personajes en la saga Maze Runner
 
+### NetworkX:
+
+"""
+Qué es: NetworkX es una biblioteca de Python para la creación, manipulación y estudio de la estructura, dinámica y funciones de complejas redes de grafos.
+
+Qué hace: Permite trabajar con grafos (redes) de una manera muy flexible y poderosa. Puedes crear grafos, agregar y eliminar nodos y aristas, calcular propiedades de grafos, encontrar caminos y realizar muchas otras operaciones relacionadas con la teoría de grafos.
+"""
+### Matplotlib:
+
+"""
+Qué es: Matplotlib es una biblioteca de Python para la creación de visualizaciones estáticas, animadas e interactivas.
+
+Qué hace: Proporciona una forma muy flexible y robusta de crear una amplia gama de gráficos y visualizaciones, incluyendo gráficos de líneas, gráficos de dispersión, histogramas, mapas de calor, y mucho más. Es especialmente útil para la visualización de datos científicos y de ingeniería.
+"""
+
+# Primero instala las librerías desde la terminal:
+# pip install networkx matplotlib
+
+# Después importamos las librerías:
 import networkx as nx
 import matplotlib.pyplot as plt
 
-### Crear un grafo vacío
+
+# Crear un grafo vacío
+"""
+Para crear un grafo vacío ejecutamos la siguiente línea e código:
+"""
 G = nx.Graph()
 
-### Lista de personajes principales y secundarios de "Maze Runner: Correr o Morir"
+# Lista de personajes principales y secundarios de "Maze Runner: Correr o Morir"
+"""
+Definimos una lista llamada Personajes donde ingresamos cada nombre de los personajes como cadenas:
+"""
 personajes = [
     "Thomas", "Teresa", "Minho", "Newt", "Jeff", "Ben", "Clint", "Marcus", "AvaPaige",
     "DraCrowford", "Ponytail", "DrUno", "MamaDeThomas",
@@ -20,11 +44,17 @@ personajes = [
     "Alex", "JefeEstacion"
 ]
 
-### Añadir nodos (personajes)
+# Añadir nodos (personajes)
+"""
+Ejecutamos la siguiente línea de código:
+"""
 for personaje in personajes:
     G.add_node(personaje)
 
-### Lista de conversaciones/interacciones entre personajes
+# Lista de conversaciones/interacciones entre personajes
+"""
+Definimos la lista llamada "interacciones" en tuplas la cual es una colección ordenada e inmutable de elementos en Python. Las tuplas se utilizan a menudo para agrupar datos relacionados.
+"""
 
 interacciones = [
     ("Thomas", "Teresa"), ("Thomas", "Minho"), ("Thomas", "Newt"), ("Thomas", "Jeff"),
@@ -71,43 +101,54 @@ interacciones = [
     ("Gally", "Alby"),
 ]
 
-### Añadir aristas (conversaciones entre personajes)
+# Añadir aristas (conversaciones entre personajes)
+
 for interaccion in interacciones:
     G.add_edge(*interaccion)
 
-### Crea una nueva figura de matplotlib con el tamaño especificado
+"""
+La línea de código anterior es un bucle for que itera sobre una lista de tuplas llamada interacciones y agrega cada tupla como una arista (edge) en un grafo G utilizando la biblioteca NetworkX.
+"""
+
+# Crear una nueva figura de matplotlib con el tamaño especificado
+
 plt.figure(figsize=(12, 10))
 
-### Asigna posiciones a los nodos en el grafo utilizando el algoritmo de disposición Spring Layout
-### Esto asegura una disposición adecuada de los nodos en el espacio
+"""
+La línea de código anterior es parte de la biblioteca Matplotlib y se utiliza para crear una nueva figura para la visualización de gráficos.
+"""
+
+# Asignar posiciones a los nodos en el grafo 
+"""
+Para esto utilizamos el algoritmo de disposición Spring Layout, esto asegura una disposición adecuada de los nodos en el espacio.
+"""
 pos = nx.spring_layout(G, seed=42)  
 
-### Dibuja el grafo G con las posiciones asignadas, incluyendo etiquetas en los nodos
-### Personaliza la apariencia del grafo, como el color de los nodos, el tamaño de los nodos, 
-### el tamaño de la fuente de las etiquetas, el grosor de los bordes y el color de los bordes
+# Con la siguiente línea de código lo que se hace es dibujar el grafo G con las posiciones asignadas, incluyendo etiquetas en los nodos, personaliza la apariencia del grafo, como el color de los nodos, el tamaño de los nodos, el tamaño de la fuente de las etiquetas, el grosor de los bordes y el color de los bordes.
+
 nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=3000, font_size=12, font_weight='bold', edge_color='gray')
 
-### Agrega un título a la figura
+# Agregar un título a la figura:
 plt.title("Grafo de conversaciones en 'Maze Runner: Correr o Morir'")
 
-### Muestra la figura en la ventana de salida
+# Mostrar la figura en la ventana de salida:
 plt.show()
 
 
-### G.nodes: Devuelve una vista que proporciona acceso a los nodos en el grafo.
+# Utilizamos G.nodes que devuelve una vista que proporciona acceso a los nodos en el grafo:
 print("Nodos:", G.nodes)
 
-### G.edges: Devuelve una vista que proporciona acceso a las aristas en el grafo.
+# Con G.edges devolvemos una vista que proporciona acceso a las aristas en el grafo:
 print("Aristas:", G.edges)
 
-### G.adj: Devuelve un diccionario que mapea los nodos a los vecinos de cada nodo.
+# Para devolver un diccionario que mapea los nodos a los vecinos de cada nodo utilizamos G.adj: 
 print("Vecinos de cada nodo:", G.adj)
 
-### G.neighbors: Devuelve un iterador que produce los vecinos de un nodo dado.
+# La línea de código siguiente devuelve un iterador que produce los vecinos de un nodo dado:
 print("Vecinos de cada nodo:")
 for node in G.nodes:
     print(f"{node}: {list(G.neighbors(node))}")
 
-### G.degree: Devuelve un diccionario que mapea los nodos a sus grados.
+# Para finalizar utilizamos el siguiente código que devuelve un diccionario que mapea los nodos a sus grados.
 print("Grado de cada nodo:")
 print(G.degree)
